@@ -25,10 +25,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
-      - run: corepack enable
-      - run: pnpm ci
-      - run: pnpm build --if-present
+          cache: 'npm'
+      - run: npm i
+      - run: npm build --if-present
 
       #  通过ssh部署打包资源到服务器
       - name: ssh deploy
