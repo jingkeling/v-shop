@@ -7,7 +7,7 @@
     "pnpm": ">= 6"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "NODE_OPTIONS=--max-old-space-size=2048 vite",
     "build": "vite build",
     "build:test": "vite build --mode test",
     "preview": "vite preview",

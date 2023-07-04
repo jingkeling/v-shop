@@ -10,6 +10,7 @@ import { useRouter } from 'vue-router';
 import API_GOODS from '@/apis/goods';
 import API_BANNER from '@/apis/banner';
 import IMAGE_LIST_EMPTY from '@/assets/images/empty/good.png';
+import { computed } from 'vue';
 
 onMounted(() => {
   getBannerList();
@@ -36,7 +37,7 @@ const list = ref<Recordable[]>([]);
 const listLoading = ref(false);
 const listFinished = ref(false);
 const listError = ref(false);
-const listFinishedText = ref('没有更多了');
+const listFinishedText = ref('没有更多了--');
 const listErrorText = ref('请求失败，点击重新加载');
 const listEmptyText = ref('暂无商品');
 const listEmptyImage = IMAGE_LIST_EMPTY;
@@ -79,6 +80,11 @@ function onPage() {
 function onGoodClicked(id: number) {
   router.push({ path: '/good/detail', query: { id } });
 }
+// 备案号
+const icp = computed(() => {
+  return import.meta.env.VITE_ICP;
+})
+
 </script>
 
 <template>
@@ -130,7 +136,11 @@ function onGoodClicked(id: number) {
           </div>
         </div>
         <template #finished>
-          <span v-if="list.length">{{ listFinishedText }}</span>
+          <div v-if="list.length">{{ listFinishedText }}
+            <div>
+              <p style=""><a class="text-color" href="https://beian.miit.gov.cn/" target="_blank">{{ icp }}</a></p>
+            </div>
+          </div>
           <van-empty v-else :image="listEmptyImage" :description="listEmptyText" />
         </template>
       </van-list>

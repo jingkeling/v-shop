@@ -10,9 +10,10 @@ export default defineComponent({
       return (
         <div class={styles.copyright}>
           <div class={styles.copyrightP}>
-            <a href="https://github.com/JoeshuTT/v-shop" target="_blank">
+            {/* <a href="https://github.com/JoeshuTT/v-shop" target="_blank">
               Copyright © 2019-{nowYear} {__APP_INFO__.pkg.name} | v{__APP_INFO__.pkg.version}
-            </a>
+            </a> */}
+          <a href="https://beian.miit.gov.cn/" target="_blank">{import.meta.env.VITE_ICP}</a>
           </div>
           <div class={styles.copyrightP}>
             <a href="https://github.com/JoeshuTT/v-shop" target="_blank">
