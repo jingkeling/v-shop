@@ -22,10 +22,9 @@ onMounted(async () => {
     message: '这不是购物网站，这是一个开发者用来展示自己技术成果的网站，没有任何实际的购买支付，仅用于交流学习',
   });
   await Dialog({
-    message: '备案号在网页底部，需要鼠标往下滚动一下。',
+    message: '备案号在网页底部，需要鼠标往下滚动一下。个人中心底部也有，一般是放在个人中心底部的',
   });
   scrollToBottom()
-
 });
 
 const router = useRouter();
@@ -102,9 +101,6 @@ const icp = computed(() => {
 
 const scrollTarget = ref()
 const scrollToBottom =  ()=> {
-  console.log(1)
-  console.log(scrollTarget.value)
-  console.log(2)
   nextTick(() => {
     scrollTarget.value.scrollIntoView({ behavior: 'smooth' });
   })

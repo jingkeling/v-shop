@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref, unref } from 'vue';
+import { computed, nextTick, onMounted, ref, unref } from 'vue';
 import API_USER from '@/apis/user';
 import API_DISCOUNTS from '@/apis/discounts';
 import API_ORDER from '@/apis/order';
@@ -22,6 +22,7 @@ onMounted(() => {
     userStore.getUserDetail();
     getCounts();
   }
+  scrollToBottom()
 });
 
 const userStore = useUserStore();
@@ -113,6 +114,13 @@ function getCounts() {
     couponCanUse.value = res.data?.canUse ?? 0;
   });
 }
+
+const scrollTarget1 = ref()
+const scrollToBottom =  ()=> {
+  nextTick(() => {
+    scrollTarget1.value.scrollIntoView({ behavior: 'smooth' });
+  })
+}
 </script>
 
 <template>
@@ -196,7 +204,9 @@ function getCounts() {
       </div>
     </div>
     <!-- 版权 -->
-    <Copyright />
+    <div ref="scrollTarget1">
+      <Copyright />
+    </div>
     <!-- 底部导航栏 -->
     <Tabbar />
   </div>
