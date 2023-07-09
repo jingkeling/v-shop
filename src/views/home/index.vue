@@ -19,10 +19,10 @@ onMounted(async () => {
   onPage();
   await Dialog({
     title: '亲爱的审核员',
-    message: '这不是购物网站，这是一个开发者用来展示自己技术成果的网站，没有任何实际的购买支付，仅用于交流学习',
+    message: '这不是购物网站，这只是用来展示编程技术成果的网站，没有任何实际的购买支付环节，仅用于交流学习（不售卖物品、不需要支付功能，因此不需要资质）',
   });
   await Dialog({
-    message: '备案号在网页底部，需要鼠标往下滚动一下。个人中心底部也有，一般是放在个人中心底部的',
+    message: '备案号在网页底部',
   });
   scrollToBottom()
 });
@@ -160,6 +160,7 @@ const scrollToBottom =  ()=> {
         <template #finished>
           <div v-if="list.length">{{ listFinishedText }}
             <div ref="scrollTarget">
+              <div style="color: red;">本网站仅用于编程开发技术分享，展示我开发商品网站的能力，不是购物网站～</div>
               <p style=""><a class="text-color" href="https://beian.miit.gov.cn/" target="_blank">{{ icp }}</a></p>
             </div>
           </div>
