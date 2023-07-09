@@ -11,10 +11,21 @@ import API_GOODS from '@/apis/goods';
 import API_BANNER from '@/apis/banner';
 import IMAGE_LIST_EMPTY from '@/assets/images/empty/good.png';
 import { computed } from 'vue';
+import { Dialog } from 'vant';
+import { nextTick } from 'vue';
 
-onMounted(() => {
+onMounted(async () => {
   getBannerList();
   onPage();
+  await Dialog({
+    title: '亲爱的审核员',
+    message: '这不是购物网站，这是一个开发者用来展示自己技术成果的网站，没有任何实际的购买支付，仅用于交流学习',
+  });
+  await Dialog({
+    message: '备案号在网页底部，需要鼠标往下滚动一下。',
+  });
+  scrollToBottom()
+
 });
 
 const router = useRouter();
@@ -23,7 +34,9 @@ const bannerList = ref<Recordable[]>([]);
 
 function getBannerList() {
   API_BANNER.bannerList({ type: 'indexBanner' }).then((res) => {
+    // bannerList.value = res.data || [];
     bannerList.value = res.data || [];
+    bannerList.value = bannerList.value.filter((_, index) => index < 1)
   });
 }
 
@@ -66,7 +79,9 @@ function onPage() {
       const records = res.data?.result ?? [];
       const total = res.data?.totalRow ?? 0;
 
-      list.value = unref(pageCurrent) === 1 ? records : unref(list).concat(records);
+      // list.value = unref(pageCurrent) === 1 ? records : unref(list).concat(records);
+      list.value = unref(pageCurrent) === 1 ? records : unref(list).concat(records)
+      list.value = list.value.filter((_, index) => index < 2)
       listLoading.value = false;
       listFinished.value = list.value.length >= total;
     })
@@ -84,6 +99,17 @@ function onGoodClicked(id: number) {
 const icp = computed(() => {
   return import.meta.env.VITE_ICP;
 })
+
+const scrollTarget = ref()
+const scrollToBottom =  ()=> {
+  console.log(1)
+  console.log(scrollTarget.value)
+  console.log(2)
+  nextTick(() => {
+    scrollTarget.value.scrollIntoView({ behavior: 'smooth' });
+  })
+}
+
 
 </script>
 
@@ -137,7 +163,7 @@ const icp = computed(() => {
         </div>
         <template #finished>
           <div v-if="list.length">{{ listFinishedText }}
-            <div>
+            <div ref="scrollTarget">
               <p style=""><a class="text-color" href="https://beian.miit.gov.cn/" target="_blank">{{ icp }}</a></p>
             </div>
           </div>

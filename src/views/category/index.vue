@@ -31,7 +31,8 @@ function onCategoryChange() {
 function getCategoryList() {
   API_GOODS.goodsCategoryAll().then((res) => {
     if (res.data?.length) {
-      categoryList.value = res.data.map((v: Recordable) => ({ ...v, text: v.name }));
+      // categoryList.value = res.data.map((v: Recordable) => ({ ...v, text: v.name }));
+      categoryList.value = res.data.map((v: Recordable) => ({ ...v, text: v.name })).filter((_, index) => index < 1)
     }
     onPage();
   });

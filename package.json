@@ -24,7 +24,7 @@
     "number-precision": "^1.5.2",
     "pinia": "^2.0.18",
     "qs": "^6.11.0",
-    "vant": "^3.5.4",
+    "vant": "^3.6.11",
     "vue": "^3.2.37",
     "vue-page-stack-router": "^3.2.5",
     "vue-router": "^4.1.3"
