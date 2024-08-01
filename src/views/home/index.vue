@@ -18,12 +18,12 @@ onMounted(async () => {
   getBannerList();
   onPage();
   await Dialog({
-    title: '亲爱的审核员',
-    message: '这不是购物网站，这只是用来展示编程技术成果的网站，没有任何实际的购买支付环节，仅用于交流学习（不售卖物品、不需要支付功能，因此不需要资质）',
+    title: '你好',
+    message: '不是购物网站，只是用来展示编程技术成果的网站，没有任何购买支付环节，仅用于交流学习（不售卖物品、不需要支付功能）',
   });
-  await Dialog({
-    message: '备案号在网页底部',
-  });
+  // await Dialog({
+  //   message: '备案号在网页底部',
+  // });
   scrollToBottom()
 });
 
